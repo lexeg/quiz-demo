@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizDemo", "QuizDemo\QuizDemo.csproj", "{C3FB3E4C-5101-43B6-A35E-1A39BB139474}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizDemo.DataAccess", "QuizDemo.DataAccess\QuizDemo.DataAccess.csproj", "{8173FE45-8443-4A15-8882-FE518042B13D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C3FB3E4C-5101-43B6-A35E-1A39BB139474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3FB3E4C-5101-43B6-A35E-1A39BB139474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3FB3E4C-5101-43B6-A35E-1A39BB139474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8173FE45-8443-4A15-8882-FE518042B13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8173FE45-8443-4A15-8882-FE518042B13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8173FE45-8443-4A15-8882-FE518042B13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8173FE45-8443-4A15-8882-FE518042B13D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

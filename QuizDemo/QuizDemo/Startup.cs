@@ -1,4 +1,7 @@
-﻿namespace QuizDemo;
+﻿using Microsoft.EntityFrameworkCore;
+using QuizDemo.DataAccess.Contexts;
+
+namespace QuizDemo;
 
 public class Startup
 {
@@ -12,6 +15,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
+
+        services.AddDbContext<QuizDbContext>(optionsBuilder =>
+            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
+
         services.AddControllers();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
