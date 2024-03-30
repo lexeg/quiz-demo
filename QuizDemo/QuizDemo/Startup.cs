@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using QuizDemo.Configuration;
 using QuizDemo.DataAccess.Contexts;
+using QuizDemo.Services;
 
 namespace QuizDemo;
 
@@ -20,6 +23,11 @@ public class Startup
         services.AddDbContext<QuizDbContext>(optionsBuilder =>
             optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddSingleton(
+            _ => new MapperConfiguration(cfg => { cfg.AddProfile(new AutoMapping()); }).CreateMapper());
+
+        services.AddScoped<IQuizesService, QuizesService>();
+        services.AddScoped<ICandidatesService, CandidatesService>();
         services.AddControllers();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -36,10 +44,6 @@ public class Startup
         }
 
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapGet("/", () => "Hello World!");
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }
