@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using QuizDemo.Configuration;
 using QuizDemo.DataAccess.Contexts;
+using QuizDemo.DataAccess.Repositories;
 using QuizDemo.Services;
 
 namespace QuizDemo;
@@ -26,6 +27,9 @@ public class Startup
         services.AddSingleton(
             _ => new MapperConfiguration(cfg => { cfg.AddProfile(new AutoMapping()); }).CreateMapper());
 
+        services.AddScoped<IQuestionRepository, QuestionRepository>();
+        services.AddScoped<ITestRepository, TestRepository>();
+        services.AddScoped<ITestResultRepository, TestResultRepository>();
         services.AddScoped<IQuizesService, QuizesService>();
         services.AddScoped<ICandidatesService, CandidatesService>();
         services.AddControllers();
