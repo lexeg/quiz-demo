@@ -6,4 +6,5 @@ public interface IQuestionRepository
 {
     Task<QuestionEntity[]> GetByTestId(Guid id);
     Task Create(QuestionEntity entity);
+    Task CreateMany(QuestionEntity[] entities);
 }

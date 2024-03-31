@@ -19,6 +19,7 @@ public class TestRepository : ITestRepository
 
     public Task Create(TestEntity entity)
     {
+        if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
         _quizDbContext.Tests.Add(entity);
         return _quizDbContext.SaveChangesAsync();
     }

@@ -1,22 +1,41 @@
-﻿using QuizDemo.Messages;
+﻿using AutoMapper;
+using QuizDemo.DataAccess.Entities;
+using QuizDemo.DataAccess.Repositories;
+using QuizDemo.Messages;
 using QuizDemo.Models;
 
 namespace QuizDemo.Services;
 
 public class QuizesService : IQuizesService
 {
-    public Task<QuizResponse[]> GetAll()
+    private readonly ITestRepository _testRepository;
+    private readonly IQuestionRepository _questionRepository;
+    private readonly IMapper _mapper;
+
+    public QuizesService(ITestRepository testRepository, IQuestionRepository questionRepository, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _testRepository = testRepository;
+        _questionRepository = questionRepository;
+        _mapper = mapper;
     }
 
-    public Task<QuizResponse> GetById(Guid id)
+    public async Task<QuizResponse[]> GetAll()
     {
-        throw new NotImplementedException();
+        var entities = await _testRepository.GetAll();
+        return entities.Select(x => _mapper.Map<QuizResponse>(x)).ToArray();
     }
 
-    public Task Create(CreateQuizModel createQuizModel)
+    public async Task<QuizResponse> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var entity = await _testRepository.GetById(id);
+        return _mapper.Map<QuizResponse>(entity);
+    }
+
+    public async Task Create(CreateQuizModel createQuizModel)
+    {
+        await _testRepository.Create(_mapper.Map<TestEntity>(createQuizModel));
+        await _questionRepository.CreateMany(createQuizModel.Questions
+            .Select(x => _mapper.Map<QuestionEntity>(x))
+            .ToArray());
     }
 }

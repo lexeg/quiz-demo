@@ -23,7 +23,6 @@ public class QuizesController : ControllerBase
     /// вернуть список всех тестов: id теста, название теста
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpGet]
     public Task<QuizResponse[]> GetAll() => _quizesService.GetAll();
 
@@ -32,11 +31,14 @@ public class QuizesController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpGet("{id}")]
     public Task<QuizResponse> GetById([FromRoute] Guid id) => _quizesService.GetById(id);
 
-    //создать тест
+    /// <summary>
+    /// создать тест
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateQuizRequest request)
     {

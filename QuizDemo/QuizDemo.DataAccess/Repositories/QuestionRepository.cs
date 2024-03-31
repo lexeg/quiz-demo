@@ -18,7 +18,19 @@ public class QuestionRepository : IQuestionRepository
 
     public Task Create(QuestionEntity entity)
     {
+        if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
         _quizDbContext.Questions.Add(entity);
+        return _quizDbContext.SaveChangesAsync();
+    }
+
+    public Task CreateMany(QuestionEntity[] entities)
+    {
+        foreach (var entity in entities)
+        {
+            if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
+            _quizDbContext.Questions.Add(entity);
+        }
+
         return _quizDbContext.SaveChangesAsync();
     }
 }
