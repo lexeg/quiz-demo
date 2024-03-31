@@ -25,15 +25,20 @@ public class QuizesService : IQuizesService
         return entities.Select(x => _mapper.Map<QuizResponse>(x)).ToArray();
     }
 
-    public async Task<QuizResponse> GetById(Guid id)
+    public async Task<QuizDetailedResponse> GetById(Guid id)
     {
         var entity = await _testRepository.GetById(id);
-        return _mapper.Map<QuizResponse>(entity);
+        return _mapper.Map<QuizDetailedResponse>(entity);
     }
 
     public async Task Create(CreateQuizModel createQuizModel)
     {
-        await _testRepository.Create(_mapper.Map<TestEntity>(createQuizModel));
+        var testId = await _testRepository.Create(_mapper.Map<TestEntity>(createQuizModel));
+        foreach (var model in createQuizModel.Questions)
+        {
+            model.TestId = testId;
+        }
+
         await _questionRepository.CreateMany(createQuizModel.Questions
             .Select(x => _mapper.Map<QuestionEntity>(x))
             .ToArray());

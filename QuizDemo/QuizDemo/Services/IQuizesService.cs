@@ -6,6 +6,6 @@ namespace QuizDemo.Services;
 public interface IQuizesService
 {
     Task<QuizResponse[]> GetAll();
-    Task<QuizResponse> GetById(Guid id);
+    Task<QuizDetailedResponse> GetById(Guid id);
     Task Create(CreateQuizModel createQuizModel);
 }

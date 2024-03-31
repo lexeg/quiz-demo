@@ -32,7 +32,7 @@ public class QuizesController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<QuizResponse> GetById([FromRoute] Guid id) => _quizesService.GetById(id);
+    public Task<QuizDetailedResponse> GetById([FromRoute] Guid id) => _quizesService.GetById(id);
 
     /// <summary>
     /// создать тест

@@ -17,10 +17,11 @@ public class TestRepository : ITestRepository
 
     public Task<TestEntity> GetById(Guid id) => _quizDbContext.Tests.FirstOrDefaultAsync(x => x.Id == id);
 
-    public Task Create(TestEntity entity)
+    public async Task<Guid> Create(TestEntity entity)
     {
         if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
         _quizDbContext.Tests.Add(entity);
-        return _quizDbContext.SaveChangesAsync();
+        await _quizDbContext.SaveChangesAsync();
+        return entity.Id;
     }
 }
