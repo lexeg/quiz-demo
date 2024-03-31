@@ -10,5 +10,5 @@ public class TestResultEntity
 
     public string Answers { get; set; }
 
-    public virtual TestEntity IdNavigation { get; set; }
+    public virtual TestEntity Test { get; set; }
 }

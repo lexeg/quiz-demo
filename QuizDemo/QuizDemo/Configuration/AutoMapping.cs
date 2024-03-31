@@ -33,7 +33,7 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => CreateAnswersMap(src)));
     }
 
-    private static QuestionDetailedModel[] CreateQuestionsMap(TestEntity testEntity) => testEntity.QuestionsTables
+    private static QuestionDetailedModel[] CreateQuestionsMap(TestEntity testEntity) => testEntity.Questions
         .Select(entity => new QuestionDetailedModel
         {
             Id = entity.Id,

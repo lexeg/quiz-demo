@@ -23,7 +23,6 @@ public class CandidatesController : ControllerBase
     /// Вернуть список тестируемых с результатами прохождения теста: id-записи (таблица с результатами тестов), email тестируемого, название теста, балл за тест
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpGet]
     public Task<CandidateResultResponse[]> GetResults() => _candidatesService.GetResults();
 
@@ -32,7 +31,6 @@ public class CandidatesController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpGet("{id}")]
     public Task<CandidateResultResponse> GetResultsById([FromRoute] Guid id) => _candidatesService.GetResultsById(id);
 
@@ -40,7 +38,6 @@ public class CandidatesController : ControllerBase
     /// Отправить информацию о прохождении теста тестируемым: id-теста, email тестируемого, ответы ([{id-вопроса, id-ответа}])
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpPost]
     public async Task<IActionResult> SaveCandidateResult([FromBody] CreateCandidateResultRequest request)
     {

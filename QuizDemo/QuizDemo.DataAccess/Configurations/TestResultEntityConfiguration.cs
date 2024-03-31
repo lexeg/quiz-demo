@@ -25,7 +25,7 @@ public class TestResultEntityConfiguration : IEntityTypeConfiguration<TestResult
             .HasColumnName("email");
         builder.Property(e => e.TestId).HasColumnName("test_id");
 
-        builder.HasOne(d => d.IdNavigation).WithOne(p => p.TestResultEntity)
+        builder.HasOne(d => d.Test).WithOne(p => p.TestResult)
             .HasForeignKey<TestResultEntity>(d => d.Id)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("test_results_table_id_fkey");

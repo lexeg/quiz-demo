@@ -25,7 +25,7 @@ public class QuestionEntityConfiguration : IEntityTypeConfiguration<QuestionEnti
             .HasColumnName("question");
         builder.Property(e => e.TestId).HasColumnName("test_id");
 
-        builder.HasOne(d => d.Test).WithMany(p => p.QuestionsTables)
+        builder.HasOne(d => d.Test).WithMany(p => p.Questions)
             .HasForeignKey(d => d.TestId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("questions_table_test_id_fkey");

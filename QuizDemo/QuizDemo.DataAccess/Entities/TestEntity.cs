@@ -8,7 +8,7 @@ public class TestEntity
 
     public string Description { get; set; }
 
-    public virtual ICollection<QuestionEntity> QuestionsTables { get; set; } = new List<QuestionEntity>();
+    public virtual ICollection<QuestionEntity> Questions { get; set; } = new List<QuestionEntity>();
 
-    public virtual TestResultEntity TestResultEntity { get; set; }
+    public virtual TestResultEntity TestResult { get; set; }
 }
