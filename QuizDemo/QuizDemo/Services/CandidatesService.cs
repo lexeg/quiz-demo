@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using QuizDemo.DataAccess.Entities;
 using QuizDemo.DataAccess.Repositories;
 using QuizDemo.Messages;
 using QuizDemo.Models;
@@ -22,13 +23,14 @@ public class CandidatesService : ICandidatesService
         return entities.Select(x => _mapper.Map<CandidateResultResponse>(x)).ToArray();
     }
 
-    public Task<CandidateResultResponse> GetResultsById(Guid id)
+    public async Task<CandidateResultResponse> GetResultsById(Guid id)
     {
-        throw new NotImplementedException();
+        var entity = await _testResultRepository.GetDetailedById(id);
+        return _mapper.Map<CandidateResultResponse>(entity);
     }
 
-    public Task SaveCandidateResult(CreateCandidateResultModel map)
+    public Task SaveCandidateResult(CreateCandidateResultModel model)
     {
-        throw new NotImplementedException();
+        return _testResultRepository.Create(_mapper.Map<TestResultEntity>(model));
     }
 }

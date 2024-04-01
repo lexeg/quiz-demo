@@ -35,7 +35,17 @@ public class TestResultRepository : ITestResultRepository
 
     public Task<TestResultDataModel> GetDetailedById(Guid id)
     {
-        throw new NotImplementedException();
+        return _quizDbContext.TestResults
+            .Where(x => x.Id == id)
+            .Include(x => x.Test)
+            .Select(x => new TestResultDataModel
+            {
+                Id = x.Id,
+                TestId = x.TestId,
+                TestName = x.Test.Name,
+                Email = x.Email,
+                Questions = CreateQuestions(x.Answers, x.Test.Questions),
+            }).SingleOrDefaultAsync();
     }
 
     public Task Create(TestResultEntity entity)

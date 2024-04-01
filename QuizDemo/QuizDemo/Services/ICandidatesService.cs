@@ -7,5 +7,5 @@ public interface ICandidatesService
 {
     Task<CandidateResultResponse[]> GetResults();
     Task<CandidateResultResponse> GetResultsById(Guid id);
-    Task SaveCandidateResult(CreateCandidateResultModel map);
+    Task SaveCandidateResult(CreateCandidateResultModel model);
 }
