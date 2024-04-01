@@ -1,5 +1,10 @@
 # quiz-demo
 
+# создать образ backend-приложения
+docker build -t demo-quiz .
+# запустить экземпляр образа
+docker run -it --rm -p 5000:8080 --name my-demo-quiz demo-quiz
+
 # создал контейнер сервера PostgreSQL
 docker run -d --name quiz-demo-pg-container -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=orcl postgres
 
