@@ -1,0 +1,8 @@
+﻿services:
+  quiz-demo-webapi:
+    image: quiz-demo-webapi
+    build:
+      context: ./QuizDemo
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
