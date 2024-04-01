@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import { QuizModel } from '../models/quizModel';
 import { QuizDetailedResponse } from '../models/QuizDetailedResponse';
 import { CreateQuizRequest } from '../models/CreateQuizRequest';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class QuizService {
   private url: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.url = environment.apiEndPoint;
+  }
 
   getAll(): Observable<QuizModel[]> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');

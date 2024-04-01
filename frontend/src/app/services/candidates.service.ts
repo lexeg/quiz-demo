@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CandidateResultResponse } from '../models/CandidateResultResponse';
 import { CreateCandidateResultRequest } from '../models/CreateCandidateResultRequest';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CandidatesService {
   private url: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.url = environment.apiEndPoint;
+  }
 
   getResults(): Observable<CandidateResultResponse[]> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
