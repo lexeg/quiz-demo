@@ -15,7 +15,26 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
-        CreateMap<CreateCandidateResultRequest, CreateCandidateResultModel>();
+        CreateMap<CreateCandidateResultRequest, CreateCandidateResultModel>()
+            .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
+        CreateMap<QuestionResultModel, QuestionResultDataModel>()
+            .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
+            .ForMember(dest => dest.QuestionText, opt => opt.MapFrom(src => src.QuestionText))
+            .ForMember(dest => dest.AnswerId, opt => opt.MapFrom(src => src.AnswerId))
+            .ForMember(dest => dest.AnswerText, opt => opt.MapFrom(src => src.AnswerText))
+            .ForMember(dest => dest.CandidateAnswerId, opt => opt.MapFrom(src => src.CandidateAnswerId));
+        CreateMap<TestResultDataModel, CandidateResultResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest => dest.TestName, opt => opt.MapFrom(src => src.TestName))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
+        CreateMap<CreateCandidateResultModel, TestResultEntity>()
+            .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => CreateAnswersMap(src.Answers)));
         CreateMap<TestEntity, QuizResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
@@ -64,5 +83,16 @@ public class AutoMapping : Profile
             AnswerId = questionModel.AnswerId
         };
         return JsonConvert.SerializeObject(answersDataModel);
+    }
+
+    private static string CreateAnswersMap(CandidateAnswerModel[] answers)
+    {
+        var items = answers.Select(answer => new CandidatesAnswerDataModel
+            {
+                QuestionId = answer.QuestionId,
+                AnswerId = answer.AnswerId
+            }
+        ).ToArray();
+        return JsonConvert.SerializeObject(items);
     }
 }
