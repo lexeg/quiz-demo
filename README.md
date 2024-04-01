@@ -20,3 +20,30 @@ dotnet ef migrations add InitialCreate
 
 # Build migration script
 dotnet ef migrations script --idempotent --project QuizDemo.DataAccess.Migrations --startup-project QuizDemo.DataAccess.Migrations --output Databases/QuizDB.sql
+
+# Frontend
+### Installation
+
+```sh
+npm i
+```
+
+### Сборка проекта
+
+```sh
+npm run build
+```
+
+### Deploy на GitHub pages
+
+```sh
+npm run deploy-github
+```
+
+### Страница проекта
+
+[quiz-demo](https://lexeg.github.io/quiz-demo/)
+
+### Ссылка на angular-cli-ghpages
+
+[angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages)
