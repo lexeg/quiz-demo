@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using QuizDemo.Configuration;
 using QuizDemo.DataAccess.Contexts;
 using QuizDemo.DataAccess.Repositories;
+using QuizDemo.Filters;
 using QuizDemo.Services;
 
 namespace QuizDemo;
@@ -32,7 +33,7 @@ public class Startup
         services.AddScoped<ITestResultRepository, TestResultRepository>();
         services.AddScoped<IQuizesService, QuizesService>();
         services.AddScoped<ICandidatesService, CandidatesService>();
-        services.AddControllers();
+        services.AddControllers(options => options.Filters.Add<HttpResponseExceptionFilter>());
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();

@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using QuizDemo.Exceptions;
 using QuizDemo.Messages;
 using QuizDemo.Models;
 using QuizDemo.Services;
@@ -32,7 +34,16 @@ public class CandidatesController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<CandidateResultResponse> GetResultsById([FromRoute] Guid id) => _candidatesService.GetResultsById(id);
+    public async Task<CandidateResultResponse> GetResultsById([FromRoute] Guid id)
+    {
+        var quiz = await _candidatesService.GetResultsById(id);
+        if (quiz == null)
+        {
+            throw new HttpResponseException(HttpStatusCode.NotFound, $"quiz with id = {id} not found");
+        }
+
+        return quiz;
+    }
 
     /// <summary>
     /// Отправить информацию о прохождении теста тестируемым: id-теста, email тестируемого, ответы ([{id-вопроса, id-ответа}])
