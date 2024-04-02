@@ -17,12 +17,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Candidates",
+					"raw": "http://localhost:5000/Candidates",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Candidates"
 					]
@@ -41,12 +41,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Candidates/DA982E3C-1791-4739-8E91-074F6E3F1CEC",
+					"raw": "http://localhost:5000/Candidates/DA982E3C-1791-4739-8E91-074F6E3F1CEC",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Candidates",
 						"DA982E3C-1791-4739-8E91-074F6E3F1CEC"
@@ -66,12 +66,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Candidates/ce86b0f1-0550-40e0-947a-b22124f1246a",
+					"raw": "http://localhost:5000/Candidates/ce86b0f1-0550-40e0-947a-b22124f1246a",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Candidates",
 						"ce86b0f1-0550-40e0-947a-b22124f1246a"
@@ -91,12 +91,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Quizes",
+					"raw": "http://localhost:5000/Quizes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Quizes"
 					]
@@ -115,12 +115,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Quizes/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+					"raw": "http://localhost:5000/Quizes/3fa85f64-5717-4562-b3fc-2c963f66afa6",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Quizes",
 						"3fa85f64-5717-4562-b3fc-2c963f66afa6"
@@ -140,12 +140,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5082/Quizes/d4553a73-0fcc-4055-97fb-683de215a878",
+					"raw": "http://localhost:5000/Quizes/d4553a73-0fcc-4055-97fb-683de215a878",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Quizes",
 						"d4553a73-0fcc-4055-97fb-683de215a878"
@@ -173,12 +173,12 @@
 					"raw": "{\r\n    \"name\": \"Тест 1\",\r\n    \"description\": \"Пробный тест 1\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"Вопрос 1\",\r\n            \"answers\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"text\": \"ответ-1 для вопроса 1\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"text\": \"ответ-2 для вопроса 1\"\r\n                },\r\n                {\r\n                    \"id\": 3,\r\n                    \"text\": \"ответ-3 для вопроса 1\"\r\n                },\r\n                {\r\n                    \"id\": 4,\r\n                    \"text\": \"ответ-4 для вопроса 1\"\r\n                }\r\n            ],\r\n            \"answerId\": 3\r\n        },\r\n        {\r\n            \"question\": \"Вопрос 2\",\r\n            \"answers\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"text\": \"ответ-1 для вопроса 2\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"text\": \"ответ-2 для вопроса 2\"\r\n                },\r\n                {\r\n                    \"id\": 3,\r\n                    \"text\": \"ответ-3 для вопроса 2\"\r\n                },\r\n                {\r\n                    \"id\": 4,\r\n                    \"text\": \"ответ-4 для вопроса 2\"\r\n                }\r\n            ],\r\n            \"answerId\": 2\r\n        },\r\n        {\r\n            \"question\": \"Вопрос 3\",\r\n            \"answers\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"text\": \"ответ-1 для вопроса 3\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"text\": \"ответ-2 для вопроса 3\"\r\n                },\r\n                {\r\n                    \"id\": 3,\r\n                    \"text\": \"ответ-3 для вопроса 3\"\r\n                },\r\n                {\r\n                    \"id\": 4,\r\n                    \"text\": \"ответ-4 для вопроса 3\"\r\n                }\r\n            ],\r\n            \"answerId\": 1\r\n        },\r\n        {\r\n            \"question\": \"Вопрос 4\",\r\n            \"answers\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"text\": \"ответ-1 для вопроса 4\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"text\": \"ответ-2 для вопроса 4\"\r\n                },\r\n                {\r\n                    \"id\": 3,\r\n                    \"text\": \"ответ-3 для вопроса 4\"\r\n                },\r\n                {\r\n                    \"id\": 4,\r\n                    \"text\": \"ответ-4 для вопроса 4\"\r\n                }\r\n            ],\r\n            \"answerId\": 3\r\n        },\r\n        {\r\n            \"question\": \"Вопрос 5\",\r\n            \"answers\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"text\": \"ответ-1 для вопроса 5\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"text\": \"ответ-2 для вопроса 5\"\r\n                },\r\n                {\r\n                    \"id\": 3,\r\n                    \"text\": \"ответ-3 для вопроса 5\"\r\n                },\r\n                {\r\n                    \"id\": 4,\r\n                    \"text\": \"ответ-4 для вопроса 5\"\r\n                }\r\n            ],\r\n            \"answerId\": 4\r\n        }\r\n    ]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5082/Quizes",
+					"raw": "http://localhost:5000/Quizes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Quizes"
 					]
@@ -205,12 +205,12 @@
 					"raw": "{\r\n    \"testId\": \"d4553a73-0fcc-4055-97fb-683de215a878\",\r\n    \"email\": \"fedya@gmail.com\",\r\n    \"answers\": [\r\n        {\r\n            \"questionId\": \"67a8871c-1bc9-47e3-8e2c-504ee3c4253c\",\r\n            \"answerId\": 2\r\n        },\r\n        {\r\n            \"questionId\": \"868c8a81-6afa-44ca-bb7a-4a399850576e\",\r\n            \"answerId\": 3\r\n        },\r\n        {\r\n            \"questionId\": \"ae2073fc-2846-475d-83ff-9cad94613d6b\",\r\n            \"answerId\": 3\r\n        },\r\n        {\r\n            \"questionId\": \"b27f73c5-1675-4aa4-b7a6-5fe6f1bfaec4\",\r\n            \"answerId\": 2\r\n        },\r\n        {\r\n            \"questionId\": \"f990629f-dd01-4f2e-a6d8-3cfc6ace9229\",\r\n            \"answerId\": 1\r\n        },\r\n    ]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5082/Candidates",
+					"raw": "http://localhost:5000/Candidates",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5082",
+					"port": "5000",
 					"path": [
 						"Candidates"
 					]

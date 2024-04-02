@@ -11,6 +11,10 @@ docker run -d --name quiz-demo-pg-container -p 5432:5432 -e POSTGRES_USER=postgr
 # создал контейнер PgAdmin
 docker run -d --name quiz-demo-pgadmin-container -p 5050:80 --env PGADMIN_DEFAULT_EMAIL=pgadmin@mail.com --env PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4
 
+# запуск с docker-compose
+docker-compose up
+страница Swagger: http://localhost:5000/swagger/index.html
+
 # создал EF-классы для работы с БД (database-first)
 dotnet ef dbcontext scaffold "Host=localhost;Port=5432;Username=postgres;Password=orcl;Database=QuizDB;" Npgsql.EntityFrameworkCore.PostgreSQL
 
@@ -40,7 +44,7 @@ npm run build
 npm run deploy-github
 ```
 
-### Страница проекта
+### Страница проекта (в работе)
 
 [quiz-demo](https://lexeg.github.io/quiz-demo/)
 

@@ -3,27 +3,27 @@ curl --location 'http://localhost:5000/Candidates' \
 --header 'accept: text/plain'
 
 "name": "Get candidate by id (http 404)":
-curl --location 'http://localhost:5082/Candidates/DA982E3C-1791-4739-8E91-074F6E3F1CEC' \
+curl --location 'http://localhost:5000/Candidates/DA982E3C-1791-4739-8E91-074F6E3F1CEC' \
 --header 'accept: text/plain'
 
 "name": "Get candidate by id (http 200)":
-curl --location 'http://localhost:5082/Candidates/ce86b0f1-0550-40e0-947a-b22124f1246a' \
+curl --location 'http://localhost:5000/Candidates/ce86b0f1-0550-40e0-947a-b22124f1246a' \
 --header 'accept: text/plain'
 
 "name": "Quizes":
-curl --location 'http://localhost:5082/Quizes' \
+curl --location 'http://localhost:5000/Quizes' \
 --header 'accept: text/plain'
 
 "name": "Get quize by id (http 404)":
-curl --location 'http://localhost:5082/Quizes/3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+curl --location 'http://localhost:5000/Quizes/3fa85f64-5717-4562-b3fc-2c963f66afa6' \
 --header 'accept: text/plain'
 
 "name": "Get quize by id (http 200)":
-curl --location 'http://localhost:5082/Quizes/d4553a73-0fcc-4055-97fb-683de215a878' \
+curl --location 'http://localhost:5000/Quizes/d4553a73-0fcc-4055-97fb-683de215a878' \
 --header 'accept: text/plain'
 
 "name": "Create quize":
-curl --location 'http://localhost:5082/Quizes' \
+curl --location 'http://localhost:5000/Quizes' \
 --header 'accept: */*' \
 --header 'Content-Type: application/json-patch+json' \
 --data '{
@@ -144,7 +144,7 @@ curl --location 'http://localhost:5082/Quizes' \
 }'
 
 "name": "Save candidate result":
-curl --location 'http://localhost:5082/Candidates' \
+curl --location 'http://localhost:5000/Candidates' \
 --header 'accept: */*' \
 --header 'Content-Type: application/json-patch+json' \
 --data-raw '{
