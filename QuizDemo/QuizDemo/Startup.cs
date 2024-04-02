@@ -33,11 +33,14 @@ public class Startup
         services.AddScoped<ITestResultRepository, TestResultRepository>();
         services.AddScoped<IQuizesService, QuizesService>();
         services.AddScoped<ICandidatesService, CandidatesService>();
-        services.AddControllers(options => options.Filters.Add<HttpResponseExceptionFilter>());
+        services
+            .AddControllers(options => options.Filters.Add<HttpResponseExceptionFilter>())
+            .AddNewtonsoftJson();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddSwaggerGenNewtonsoftSupport();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
