@@ -36,13 +36,13 @@ public class CandidatesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<CandidateResultResponse> GetResultsById([FromRoute] Guid id)
     {
-        var quiz = await _candidatesService.GetResultsById(id);
-        if (quiz == null)
+        var candidateResults = await _candidatesService.GetResultsById(id);
+        if (candidateResults == null)
         {
-            throw new HttpResponseException(HttpStatusCode.NotFound, $"quiz with id = {id} not found");
+            throw new HttpResponseException(HttpStatusCode.NotFound, $"candidate results with id = {id} not found");
         }
 
-        return quiz;
+        return candidateResults;
     }
 
     /// <summary>

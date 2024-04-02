@@ -24,7 +24,8 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.QuestionText, opt => opt.MapFrom(src => src.QuestionText))
             .ForMember(dest => dest.AnswerId, opt => opt.MapFrom(src => src.AnswerId))
             .ForMember(dest => dest.AnswerText, opt => opt.MapFrom(src => src.AnswerText))
-            .ForMember(dest => dest.CandidateAnswerId, opt => opt.MapFrom(src => src.CandidateAnswerId));
+            .ForMember(dest => dest.CandidateAnswerId, opt => opt.MapFrom(src => src.CandidateAnswerId))
+            .ReverseMap();
         CreateMap<TestResultDataModel, CandidateResultResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
