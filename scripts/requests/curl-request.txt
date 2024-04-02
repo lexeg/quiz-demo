@@ -1,0 +1,175 @@
+"name": "Candidates":
+curl --location 'http://localhost:5000/Candidates' \
+--header 'accept: text/plain'
+
+"name": "Get candidate by id (http 404)":
+curl --location 'http://localhost:5082/Candidates/DA982E3C-1791-4739-8E91-074F6E3F1CEC' \
+--header 'accept: text/plain'
+
+"name": "Get candidate by id (http 200)":
+curl --location 'http://localhost:5082/Candidates/ce86b0f1-0550-40e0-947a-b22124f1246a' \
+--header 'accept: text/plain'
+
+"name": "Quizes":
+curl --location 'http://localhost:5082/Quizes' \
+--header 'accept: text/plain'
+
+"name": "Get quize by id (http 404)":
+curl --location 'http://localhost:5082/Quizes/3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+--header 'accept: text/plain'
+
+"name": "Get quize by id (http 200)":
+curl --location 'http://localhost:5082/Quizes/d4553a73-0fcc-4055-97fb-683de215a878' \
+--header 'accept: text/plain'
+
+"name": "Create quize":
+curl --location 'http://localhost:5082/Quizes' \
+--header 'accept: */*' \
+--header 'Content-Type: application/json-patch+json' \
+--data '{
+    "name": "Тест 1",
+    "description": "Пробный тест 1",
+    "questions": [
+        {
+            "question": "Вопрос 1",
+            "answers": [
+                {
+                    "id": 1,
+                    "text": "ответ-1 для вопроса 1"
+                },
+                {
+                    "id": 2,
+                    "text": "ответ-2 для вопроса 1"
+                },
+                {
+                    "id": 3,
+                    "text": "ответ-3 для вопроса 1"
+                },
+                {
+                    "id": 4,
+                    "text": "ответ-4 для вопроса 1"
+                }
+            ],
+            "answerId": 3
+        },
+        {
+            "question": "Вопрос 2",
+            "answers": [
+                {
+                    "id": 1,
+                    "text": "ответ-1 для вопроса 2"
+                },
+                {
+                    "id": 2,
+                    "text": "ответ-2 для вопроса 2"
+                },
+                {
+                    "id": 3,
+                    "text": "ответ-3 для вопроса 2"
+                },
+                {
+                    "id": 4,
+                    "text": "ответ-4 для вопроса 2"
+                }
+            ],
+            "answerId": 2
+        },
+        {
+            "question": "Вопрос 3",
+            "answers": [
+                {
+                    "id": 1,
+                    "text": "ответ-1 для вопроса 3"
+                },
+                {
+                    "id": 2,
+                    "text": "ответ-2 для вопроса 3"
+                },
+                {
+                    "id": 3,
+                    "text": "ответ-3 для вопроса 3"
+                },
+                {
+                    "id": 4,
+                    "text": "ответ-4 для вопроса 3"
+                }
+            ],
+            "answerId": 1
+        },
+        {
+            "question": "Вопрос 4",
+            "answers": [
+                {
+                    "id": 1,
+                    "text": "ответ-1 для вопроса 4"
+                },
+                {
+                    "id": 2,
+                    "text": "ответ-2 для вопроса 4"
+                },
+                {
+                    "id": 3,
+                    "text": "ответ-3 для вопроса 4"
+                },
+                {
+                    "id": 4,
+                    "text": "ответ-4 для вопроса 4"
+                }
+            ],
+            "answerId": 3
+        },
+        {
+            "question": "Вопрос 5",
+            "answers": [
+                {
+                    "id": 1,
+                    "text": "ответ-1 для вопроса 5"
+                },
+                {
+                    "id": 2,
+                    "text": "ответ-2 для вопроса 5"
+                },
+                {
+                    "id": 3,
+                    "text": "ответ-3 для вопроса 5"
+                },
+                {
+                    "id": 4,
+                    "text": "ответ-4 для вопроса 5"
+                }
+            ],
+            "answerId": 4
+        }
+    ]
+}'
+
+"name": "Save candidate result":
+curl --location 'http://localhost:5082/Candidates' \
+--header 'accept: */*' \
+--header 'Content-Type: application/json-patch+json' \
+--data-raw '{
+    "testId": "d4553a73-0fcc-4055-97fb-683de215a878",
+    "email": "fedya@gmail.com",
+    "answers": [
+        {
+            "questionId": "67a8871c-1bc9-47e3-8e2c-504ee3c4253c",
+            "answerId": 2
+        },
+        {
+            "questionId": "868c8a81-6afa-44ca-bb7a-4a399850576e",
+            "answerId": 3
+        },
+        {
+            "questionId": "ae2073fc-2846-475d-83ff-9cad94613d6b",
+            "answerId": 3
+        },
+        {
+            "questionId": "b27f73c5-1675-4aa4-b7a6-5fe6f1bfaec4",
+            "answerId": 2
+        },
+        {
+            "questionId": "f990629f-dd01-4f2e-a6d8-3cfc6ace9229",
+            "answerId": 1
+        },
+    ]
+}'
