@@ -63,3 +63,36 @@ BEGIN
 END $EF$;
 COMMIT;
 
+START TRANSACTION;
+
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240402084544_FixForeignKeyInTestResultsTable') THEN
+    ALTER TABLE test_results_table DROP CONSTRAINT test_results_table_id_fkey;
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240402084544_FixForeignKeyInTestResultsTable') THEN
+    CREATE UNIQUE INDEX "IX_test_results_table_test_id" ON test_results_table (test_id);
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240402084544_FixForeignKeyInTestResultsTable') THEN
+    ALTER TABLE test_results_table ADD CONSTRAINT test_results_table_id_fkey FOREIGN KEY (test_id) REFERENCES tests_table (id);
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240402084544_FixForeignKeyInTestResultsTable') THEN
+    INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+    VALUES ('20240402084544_FixForeignKeyInTestResultsTable', '8.0.3');
+    END IF;
+END $EF$;
+COMMIT;
+
