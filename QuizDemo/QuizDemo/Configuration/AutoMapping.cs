@@ -45,7 +45,8 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => CreateQuestionsMap(src)));
         CreateMap<CreateQuizModel, TestEntity>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.Questions, opt => opt.Ignore());
         CreateMap<QuestionModel, QuestionEntity>()
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
             .ForMember(dest => dest.Question, opt => opt.MapFrom(src => src.Question))

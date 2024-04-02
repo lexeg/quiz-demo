@@ -15,7 +15,10 @@ public class TestRepository : ITestRepository
 
     public Task<TestEntity[]> GetAll() => _quizDbContext.Tests.ToArrayAsync();
 
-    public Task<TestEntity> GetById(Guid id) => _quizDbContext.Tests.FirstOrDefaultAsync(x => x.Id == id);
+    public Task<TestEntity> GetById(Guid id) => _quizDbContext
+        .Tests
+        .Include(x => x.Questions)
+        .FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<Guid> Create(TestEntity entity)
     {
