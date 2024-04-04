@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { QuizModel } from '../contracts/QuizModel';
+import { QuizResponse } from '../contracts/QuizResponse';
 import { QuizDetailedResponse } from '../contracts/QuizDetailedResponse';
 import { CreateQuizRequest } from '../contracts/CreateQuizRequest';
 import { environment } from '../../environments/environment';
@@ -14,9 +14,9 @@ export class QuizService {
     this.url = environment.apiEndPoint;
   }
 
-  getAll(): Observable<QuizModel[]> {
+  getAll(): Observable<QuizResponse[]> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<QuizModel[]>(`${this.url}`, {
+    return this.http.get<QuizResponse[]>(`${this.url}`, {
       headers: myHeaders,
     });
   }

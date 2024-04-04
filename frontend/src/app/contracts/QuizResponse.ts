@@ -1,4 +1,4 @@
-export class QuizModel {
+export class QuizResponse {
   id: string;
   name: string;
 }

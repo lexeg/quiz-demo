@@ -1,7 +1,7 @@
 import { AnswerModel } from './AnswerModel';
 
 export interface QuestionModel {
-  testId: string;
+  // testId: string;
   question: string;
   answers: AnswerModel[];
   answerId: number;
