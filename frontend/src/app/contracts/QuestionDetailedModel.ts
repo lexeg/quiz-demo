@@ -5,4 +5,5 @@ export class QuestionDetailedModel {
   testId: string;
   question: string;
   answers: AnswerModel[];
+  selectedAnswerId?: number;
 }
