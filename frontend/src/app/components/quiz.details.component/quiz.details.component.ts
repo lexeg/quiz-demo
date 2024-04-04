@@ -7,10 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { QuizService } from '../services/quiz.service';
+import { QuizService } from '../../services/quiz.service';
 import { QuizResultDialog } from '../quiz-results.component/quiz-results.component';
-import { QuizDetailedResponse } from '../contracts/QuizDetailedResponse';
-import { QuestionDetailedModel } from '../contracts/QuestionDetailedModel';
+import { QuizDetailedResponse } from '../../contracts/QuizDetailedResponse';
+import { QuestionDetailedModel } from '../../contracts/QuestionDetailedModel';
 
 @Component({
   selector: 'quiz-details-component',

@@ -14,6 +14,6 @@ import { MatListModule } from '@angular/material/list';
 })
 @Injectable()
 export class QuizResultDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public items: string[]) {}
+  // constructor(@Inject(MAT_DIALOG_DATA) public items: string[]) {}
 }
 /*Пересмотреть компонент. Скорей всего стоит удалить*/

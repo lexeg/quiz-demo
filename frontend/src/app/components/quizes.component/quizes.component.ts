@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { QuizService } from '../services/quiz.service';
-import { QuizResponse } from '../contracts/QuizResponse';
+import { QuizService } from '../../services/quiz.service';
+import { QuizResponse } from '../../contracts/QuizResponse';
 
 @Component({
   selector: 'quizes-component',
