@@ -1,0 +1,44 @@
+<mat-card *ngIf="!isLoaded">
+  <mat-card-content>
+    <h2>Дождитесь завершения загрузки</h2>
+    <mat-spinner></mat-spinner>
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="isLoaded">
+  <mat-card-header>
+    <mat-card-title>Вопросы теста</mat-card-title>
+    <mat-card-subtitle
+      >Вопрос {{ currentQuestionNumber + 1 }} из
+      {{ questions.length }}</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <label for="current-question">{{ currentQuestion.text }}</label>
+    <mat-radio-group
+      id="current-question"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="currentQuestion.selectedAnswerId">
+      @for (answer of currentQuestion.answers; track $index) {
+        <mat-radio-button class="example-radio-button" [value]="$index">{{
+          answer
+        }}</mat-radio-button>
+      }
+    </mat-radio-group>
+    <div>{{ showSelectedAnswers }}</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="previous()">Назад</button>
+    <button
+      mat-button
+      (click)="next()"
+      [disabled]="currentQuestion.selectedAnswerId === undefined">
+      {{
+        questions.length === currentQuestionNumber + 1
+          ? 'Завершить тест'
+          : 'Вперед'
+      }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+<!-- <button mat-stroked-button color="primary" (click)="getData()">Primary</button> -->
