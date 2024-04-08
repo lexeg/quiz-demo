@@ -1,5 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using QuizDemo.Configuration;
 using QuizDemo.DataAccess.Contexts;
 using QuizDemo.DataAccess.Repositories;
@@ -35,11 +39,25 @@ public class Startup
         services.AddScoped<ICandidatesService, CandidatesService>();
         services
             .AddControllers(options => options.Filters.Add<HttpResponseExceptionFilter>())
-            .AddNewtonsoftJson();
+            .AddNewtonsoftJson(c =>
+            {
+                c.SerializerSettings.Converters.Add(new StringEnumConverter
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                });
+            });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Quiz demo API", Version = "v1" });
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+            options.UseInlineDefinitionsForEnums();
+            options.EnableAnnotations();
+        });
         services.AddSwaggerGenNewtonsoftSupport();
     }
 
