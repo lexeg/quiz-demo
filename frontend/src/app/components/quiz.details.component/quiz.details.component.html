@@ -13,7 +13,7 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <label for="current-question">{{ currentQuestion.text }}</label>
+    <label for="current-question">{{ currentQuestion.question }}</label>
     <mat-radio-group
       id="current-question"
       aria-labelledby="example-radio-group-label"
@@ -21,7 +21,7 @@
       [(ngModel)]="currentQuestion.selectedAnswerId">
       @for (answer of currentQuestion.answers; track $index) {
         <mat-radio-button class="example-radio-button" [value]="$index">{{
-          answer
+          answer.text
         }}</mat-radio-button>
       }
     </mat-radio-group>
@@ -41,4 +41,3 @@
     </button>
   </mat-card-actions>
 </mat-card>
-<!-- <button mat-stroked-button color="primary" (click)="getData()">Primary</button> -->

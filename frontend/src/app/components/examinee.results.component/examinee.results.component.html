@@ -9,7 +9,6 @@
     <mat-card-title>Список с результатами тестирования</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <!--['position', 'id', 'test-id', 'test-name', 'email'];-->
     <table mat-table [dataSource]="candidateResults" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -22,7 +21,7 @@
       </ng-container>
 
       <ng-container matColumnDef="test-id">
-        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <th mat-header-cell *matHeaderCellDef>Test id</th>
         <td mat-cell *matCellDef="let element">{{ element.testId }}</td>
       </ng-container>
 

@@ -77,7 +77,7 @@ export class QuizDetailsComponent implements OnInit {
   openDialog() {
     this.dialog.open(QuizResultDialog, {
       data: this.questions.map(
-        x => `Вопрос ${x.id}, выбранный ответ ${x.selectedAnswerId};`
+        x => `Вопрос ${x.question}, выбранный ответ ${x.selectedAnswerId};`
       ),
     });
   }
