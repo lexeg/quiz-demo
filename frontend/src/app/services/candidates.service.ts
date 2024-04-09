@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CandidateResultResponse } from '../models/CandidateResultResponse';
-import { CreateCandidateResultRequest } from '../models/CreateCandidateResultRequest';
+import { CandidateResultResponse } from '../contracts/CandidateResultResponse';
+import { CreateCandidateResultRequest } from '../contracts/CreateCandidateResultRequest';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -15,21 +15,24 @@ export class CandidatesService {
 
   getResults(): Observable<CandidateResultResponse[]> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<CandidateResultResponse[]>(`${this.url}`, {
+    return this.http.get<CandidateResultResponse[]>(`${this.url}/Candidates`, {
       headers: myHeaders,
     });
   }
 
   getResultsById(id: string): Observable<CandidateResultResponse> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<CandidateResultResponse>(`${this.url}/${id}`, {
-      headers: myHeaders,
-    });
+    return this.http.get<CandidateResultResponse>(
+      `${this.url}/Candidates/${id}`,
+      {
+        headers: myHeaders,
+      }
+    );
   }
 
   saveCandidateResult(request: CreateCandidateResultRequest): Observable<any> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(`${this.url}`, JSON.stringify(request), {
+    return this.http.post(`${this.url}/Candidates`, JSON.stringify(request), {
       headers: myHeaders,
     });
   }
