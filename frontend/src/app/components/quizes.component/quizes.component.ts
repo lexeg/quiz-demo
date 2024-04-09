@@ -8,6 +8,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QuizService } from '../../services/quiz.service';
 import { QuizResponse } from '../../contracts/QuizResponse';
 
+export class QuizElement {
+  id: string;
+  name: string;
+  position: number;
+}
+
 @Component({
   selector: 'quizes-component',
   standalone: true,
@@ -25,8 +31,8 @@ import { QuizResponse } from '../../contracts/QuizResponse';
 })
 export class QuizesComponent implements OnInit {
   isLoaded: boolean;
-  displayedColumns: string[] = ['id', 'name'];
-  quizes: QuizResponse[];
+  displayedColumns: string[] = ['position', 'id', 'name'];
+  quizes: QuizElement[];
 
   constructor(private quizService: QuizService) {}
   ngOnInit(): void {
@@ -35,7 +41,11 @@ export class QuizesComponent implements OnInit {
 
   private loadQuizes() {
     this.quizService.getAll().subscribe((data: QuizResponse[]) => {
-      this.quizes = data;
+      this.quizes = data.map<QuizElement>((q, index) => ({
+        id: q.id,
+        name: q.name,
+        position: index + 1,
+      }));
       this.isLoaded = true;
     });
   }

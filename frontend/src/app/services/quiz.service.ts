@@ -16,21 +16,21 @@ export class QuizService {
 
   getAll(): Observable<QuizResponse[]> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<QuizResponse[]>(`${this.url}`, {
+    return this.http.get<QuizResponse[]>(`${this.url}/Quizes`, {
       headers: myHeaders,
     });
   }
 
   getById(id: string): Observable<QuizDetailedResponse> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<QuizDetailedResponse>(`${this.url}/${id}`, {
+    return this.http.get<QuizDetailedResponse>(`${this.url}/Quizes/${id}`, {
       headers: myHeaders,
     });
   }
 
   create(request: CreateQuizRequest): Observable<any> {
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(`${this.url}`, JSON.stringify(request), {
+    return this.http.post(`${this.url}/Quizes`, JSON.stringify(request), {
       headers: myHeaders,
     });
   }
