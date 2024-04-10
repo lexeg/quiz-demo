@@ -1,1 +1,45 @@
-<p>Компонент страница с деталями о тесте</p>
+<mat-card *ngIf="!isLoaded">
+  <mat-card-content>
+    <h2>Дождитесь завершения загрузки</h2>
+    <mat-spinner></mat-spinner>
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="isLoaded">
+  <mat-card-header>
+    <mat-card-title>{{ candidateResult.testName }}</mat-card-title>
+    <mat-card-subtitle>Email: {{ candidateResult.email }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <table
+      mat-table
+      [dataSource]="candidateResult.questions"
+      class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.questionId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="question">
+        <th mat-header-cell *matHeaderCellDef>Вопрос</th>
+        <td mat-cell *matCellDef="let element">{{ element.questionText }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="candidate-answer">
+        <th mat-header-cell *matHeaderCellDef>Номер ответа кандидата</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.candidateAnswerId }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="answer">
+        <th mat-header-cell *matHeaderCellDef>Правильный ответ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.answerText }} ({{ element.answerId }})
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
