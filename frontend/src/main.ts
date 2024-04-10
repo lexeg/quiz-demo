@@ -1,7 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { QuizesComponent } from './app/components/quizes.component/quizes.component';
+import { MainComponent } from './app/components/main-component/main-component';
+import { appConfig } from './app/app.config';
 
-bootstrapApplication(QuizesComponent, {
-  providers: [provideAnimations()],
-}).catch(err => console.error(err));
+bootstrapApplication(MainComponent, appConfig).catch(err => console.error(err));
