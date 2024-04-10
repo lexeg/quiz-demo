@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { switchMap } from 'rxjs/operators';
 import { QuizService } from '../../services/quiz.service';
 import { QuizResultDialog } from '../quiz-results.component/quiz-results.component';
 import { QuizDetailedResponse } from '../../contracts/QuizDetailedResponse';
@@ -36,6 +38,7 @@ export class QuizDetailsComponent implements OnInit {
   showSelectedAnswers: string;
 
   constructor(
+    private activateRoute: ActivatedRoute,
     private quizService: QuizService,
     public dialog: MatDialog
   ) {
@@ -43,18 +46,21 @@ export class QuizDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadQuestions();
+    this.activateRoute.paramMap
+      .pipe(switchMap(p => p.getAll('id')))
+      .subscribe(data => {
+        const id = data;
+        this.loadQuestions(id);
+      });
   }
 
-  private loadQuestions() {
-    this.quizService
-      .getById('<fake-id>')
-      .subscribe((data: QuizDetailedResponse) => {
-        this.questions = data.questions;
-        this.isLoaded = true;
-        this.currentQuestionNumber = 0;
-        this.currentQuestion = this.questions[0];
-      });
+  private loadQuestions(id: string) {
+    this.quizService.getById(id).subscribe((data: QuizDetailedResponse) => {
+      this.questions = data.questions;
+      this.isLoaded = true;
+      this.currentQuestionNumber = 0;
+      this.currentQuestion = this.questions[0];
+    });
   }
 
   previous() {

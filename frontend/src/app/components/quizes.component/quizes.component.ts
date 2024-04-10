@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
@@ -31,12 +32,19 @@ export class QuizElement {
 })
 export class QuizesComponent implements OnInit {
   isLoaded: boolean;
-  displayedColumns: string[] = ['position', 'id', 'name'];
+  displayedColumns: string[] = ['position', 'id', 'name', 'actions'];
   quizes: QuizElement[];
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private router: Router,
+    private quizService: QuizService
+  ) {}
   ngOnInit(): void {
     this.loadQuizes();
+  }
+
+  goToQuizDetails(id: string) {
+    this.router.navigate(['/quiz-details', id]);
   }
 
   private loadQuizes() {

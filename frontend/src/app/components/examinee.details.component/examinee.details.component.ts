@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { switchMap } from "rxjs/operators";
+import { switchMap } from 'rxjs/operators';
 import { CandidatesService } from '../../services/candidates.service';
 import { CandidateResultResponse } from '../../contracts/CandidateResultResponse';
 
@@ -41,13 +41,15 @@ export class ExamineeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activateRoute.paramMap.pipe(switchMap(p => p.getAll('id'))).subscribe(data=>{
-      const id = this.activateRoute.snapshot.params['id'];
-      this.loadQuestions(id);
-    })
+    this.activateRoute.paramMap
+      .pipe(switchMap(p => p.getAll('id')))
+      .subscribe(data => {
+        const id = data;
+        this.loadExamineeById(id);
+      });
   }
 
-  private loadQuestions(id: string) {
+  private loadExamineeById(id: string) {
     this.candidatesService
       .getResultsById(id)
       .subscribe((data: CandidateResultResponse) => {
