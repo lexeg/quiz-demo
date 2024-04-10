@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { switchMap } from "rxjs/operators";
 import { CandidatesService } from '../../services/candidates.service';
 import { CandidateResultResponse } from '../../contracts/CandidateResultResponse';
 
@@ -33,15 +35,21 @@ export class ExamineeDetailsComponent implements OnInit {
   ];
   candidateResult: CandidateResultResponse;
 
-  constructor(private candidatesService: CandidatesService) {}
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private candidatesService: CandidatesService
+  ) {}
 
   ngOnInit(): void {
-    this.loadQuestions();
+    this.activateRoute.paramMap.pipe(switchMap(p => p.getAll('id'))).subscribe(data=>{
+      const id = this.activateRoute.snapshot.params['id'];
+      this.loadQuestions(id);
+    })
   }
 
-  private loadQuestions() {
+  private loadQuestions(id: string) {
     this.candidatesService
-      .getResultsById('<fake-id>')
+      .getResultsById(id)
       .subscribe((data: CandidateResultResponse) => {
         this.candidateResult = data;
         this.isLoaded = true;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
@@ -39,12 +40,17 @@ export class ExamineeResultsComponent implements OnInit {
     'test-id',
     'test-name',
     'email',
+    'actions'
   ];
   candidateResults: CandidateResultElement[];
 
-  constructor(private candidatesService: CandidatesService) {}
+  constructor(private router: Router, private candidatesService: CandidatesService) {}
   ngOnInit(): void {
     this.loadCandidateResults();
+  }
+
+  goToExamineeDetails(id: string){
+    this.router.navigate(["/examinee-details",id]);
   }
 
   private loadCandidateResults() {
