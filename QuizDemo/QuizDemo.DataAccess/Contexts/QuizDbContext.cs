@@ -10,6 +10,10 @@ public class QuizDbContext : DbContext
     {
     }
 
+    public virtual DbSet<BranchOfficeEntity> BranchOffices { get; set; }
+
+    public virtual DbSet<EducationalProgramEntity> EducationalPrograms { get; set; }
+
     public virtual DbSet<QuestionEntity> Questions { get; set; }
 
     public virtual DbSet<TestResultEntity> TestResults { get; set; }
@@ -21,5 +25,7 @@ public class QuizDbContext : DbContext
         modelBuilder.ApplyConfiguration(new QuestionEntityConfiguration());
         modelBuilder.ApplyConfiguration(new TestResultEntityConfiguration());
         modelBuilder.ApplyConfiguration(new TestEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new BranchOfficeEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new EducationalProgramEntityConfiguration());
     }
 }

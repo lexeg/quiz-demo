@@ -23,11 +23,37 @@ public class TestResultEntityConfiguration : IEntityTypeConfiguration<TestResult
             .IsRequired()
             .HasMaxLength(100)
             .HasColumnName("email");
+        builder.Property(e => e.FullName)
+            .IsRequired()
+            .HasMaxLength(100)
+            .HasColumnName("full_name");
+        builder.Property(e => e.MobilePhone)
+            .IsRequired()
+            .HasMaxLength(20)
+            .HasColumnName("mobile_phone");
         builder.Property(e => e.TestId).HasColumnName("test_id");
+        builder.Property(e => e.BranchOfficeId).HasColumnName("branch_office_id");
+        builder.Property(e => e.EducationalProgramId).HasColumnName("educational_program_id");
 
-        builder.HasOne(d => d.Test).WithOne(p => p.TestResult)
+        builder
+            .HasOne(d => d.Test)
+            .WithOne(p => p.TestResult)
             .HasForeignKey<TestResultEntity>(d => d.TestId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("test_results_table_id_fkey");
+
+        builder
+            .HasOne(d => d.BranchOffice)
+            .WithMany(p => p.TestResults)
+            .HasForeignKey(d => d.BranchOfficeId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("test_results_table_branch_office_id_fkey");
+
+        builder
+            .HasOne(d => d.EducationalProgram)
+            .WithMany(p => p.TestResults)
+            .HasForeignKey(d => d.EducationalProgramId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("test_results_table_educational_program_id_fkey");
     }
 }
