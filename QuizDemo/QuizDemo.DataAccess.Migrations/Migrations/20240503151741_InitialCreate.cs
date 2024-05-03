@@ -79,6 +79,8 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     full_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     mobile_phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    presigned_url = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
+                    expired_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     answers = table.Column<string>(type: "json", nullable: false)
                 },
                 constraints: table =>

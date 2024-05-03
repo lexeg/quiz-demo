@@ -17,7 +17,7 @@ VALUES ('67a8871c-1bc9-47e3-8e2c-504ee3c4253c', 'd4553a73-0fcc-4055-97fb-683de21
 	   ('b27f73c5-1675-4aa4-b7a6-5fe6f1bfaec4', 'd4553a73-0fcc-4055-97fb-683de215a878', 'Вопрос 2', '{"Answers":[{"Id":1,"Text":"ответ-1 для вопроса 2"},{"Id":2,"Text":"ответ-2 для вопроса 2"},{"Id":3,"Text":"ответ-3 для вопроса 2"},{"Id":4,"Text":"ответ-4 для вопроса 2"}],"AnswerId":2}'),
 	   ('f990629f-dd01-4f2e-a6d8-3cfc6ace9229', 'd4553a73-0fcc-4055-97fb-683de215a878', 'Вопрос 5', '{"Answers":[{"Id":1,"Text":"ответ-1 для вопроса 5"},{"Id":2,"Text":"ответ-2 для вопроса 5"},{"Id":3,"Text":"ответ-3 для вопроса 5"},{"Id":4,"Text":"ответ-4 для вопроса 5"}],"AnswerId":4}');
 	   
-INSERT INTO public.test_results_table(id, test_id, branch_office_id, educational_program_id, email, full_name, mobile_phone, answers)
+INSERT INTO public.test_results_table(id, test_id, branch_office_id, educational_program_id, email, full_name, mobile_phone, presigned_url, expired_date, answers)
 VALUES ('ce86b0f1-0550-40e0-947a-b22124f1246a',
 		'd4553a73-0fcc-4055-97fb-683de215a878',
 		'2952F21F-5FED-4AA8-BA77-C8A466230349',
@@ -25,4 +25,6 @@ VALUES ('ce86b0f1-0550-40e0-947a-b22124f1246a',
 		'fedya@gmail.com',
 		'Фёдоров Фёдор Фёдорович',
 		'+7(999)123-45-67',
+		'e2fd2fda9b8e9b10fc3bc4c027ecb913',
+		NOW() + INTERVAL '1 DAY',
 		'[{"QuestionId":"67a8871c-1bc9-47e3-8e2c-504ee3c4253c","AnswerId":2},{"QuestionId":"868c8a81-6afa-44ca-bb7a-4a399850576e","AnswerId":3},{"QuestionId":"ae2073fc-2846-475d-83ff-9cad94613d6b","AnswerId":3},{"QuestionId":"b27f73c5-1675-4aa4-b7a6-5fe6f1bfaec4","AnswerId":2},{"QuestionId":"f990629f-dd01-4f2e-a6d8-3cfc6ace9229","AnswerId":1}]');

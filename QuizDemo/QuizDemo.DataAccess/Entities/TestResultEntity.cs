@@ -16,6 +16,10 @@ public class TestResultEntity
 
     public string MobilePhone { get; set; }
 
+    public string PresignedUrl { get; set; }
+
+    public DateTime ExpiredDate { get; set; }
+
     public string Answers { get; set; }
 
     public virtual TestEntity Test { get; set; }

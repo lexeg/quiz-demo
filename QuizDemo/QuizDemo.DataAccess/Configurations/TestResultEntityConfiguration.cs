@@ -31,6 +31,11 @@ public class TestResultEntityConfiguration : IEntityTypeConfiguration<TestResult
             .IsRequired()
             .HasMaxLength(20)
             .HasColumnName("mobile_phone");
+        builder.Property(e => e.PresignedUrl)
+            .IsRequired()
+            .HasMaxLength(300)
+            .HasColumnName("presigned_url");
+        builder.Property(e => e.ExpiredDate).HasColumnName("expired_date");
         builder.Property(e => e.TestId).HasColumnName("test_id");
         builder.Property(e => e.BranchOfficeId).HasColumnName("branch_office_id");
         builder.Property(e => e.EducationalProgramId).HasColumnName("educational_program_id");

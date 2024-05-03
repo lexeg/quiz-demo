@@ -142,6 +142,10 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("email");
 
+                    b.Property<DateTime>("ExpiredDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expired_date");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -153,6 +157,12 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
                         .HasColumnName("mobile_phone");
+
+                    b.Property<string>("PresignedUrl")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("presigned_url");
 
                     b.Property<Guid>("TestId")
                         .HasColumnType("uuid")
