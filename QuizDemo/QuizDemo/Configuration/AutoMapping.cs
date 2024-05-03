@@ -19,6 +19,12 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
+        CreateMap<CreateEducationalProgramRequest, CreateEducationalProgramModel>()
+            .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+        CreateMap<CreateBranchOfficeRequest, CreateBranchOfficeModel>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.Prefix, opt => opt.MapFrom(src => src.Prefix));
         CreateMap<QuestionResultModel, QuestionResultDataModel>()
             .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
             .ForMember(dest => dest.QuestionText, opt => opt.MapFrom(src => src.QuestionText))
@@ -36,6 +42,12 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => CreateAnswersMap(src.Answers)));
+        CreateMap<CreateEducationalProgramModel, EducationalProgramEntity>()
+            .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+        CreateMap<CreateBranchOfficeModel, BranchOfficeEntity>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.Prefix, opt => opt.MapFrom(src => src.Prefix));
         CreateMap<TestEntity, QuizResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
@@ -44,6 +56,13 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => CreateQuestionsMap(src)));
+        CreateMap<EducationalProgramEntity, EducationalProgramResponse>()
+            .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+        CreateMap<BranchOfficeEntity, BranchOfficeResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.Prefix, opt => opt.MapFrom(src => src.Prefix));
         CreateMap<CreateQuizModel, TestEntity>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))

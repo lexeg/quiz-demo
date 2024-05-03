@@ -35,8 +35,12 @@ public class Startup
         services.AddScoped<IQuestionRepository, QuestionRepository>();
         services.AddScoped<ITestRepository, TestRepository>();
         services.AddScoped<ITestResultRepository, TestResultRepository>();
+        services.AddScoped<IEducationalProgramRepository, EducationalProgramRepository>();
+        services.AddScoped<IBranchOfficeRepository, BranchOfficeRepository>();
         services.AddScoped<IQuizesService, QuizesService>();
         services.AddScoped<ICandidatesService, CandidatesService>();
+        services.AddScoped<IEducationalProgramsService, EducationalProgramsService>();
+        services.AddScoped<IBranchOfficesService, BranchOfficesService>();
         services
             .AddControllers(options => options.Filters.Add<HttpResponseExceptionFilter>())
             .AddNewtonsoftJson(c =>
