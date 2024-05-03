@@ -149,7 +149,11 @@ curl --location 'http://localhost:5000/Candidates' \
 --header 'Content-Type: application/json-patch+json' \
 --data-raw '{
     "testId": "d4553a73-0fcc-4055-97fb-683de215a878",
+    "branchOfficeId": "56d96454-6ded-4cb3-a408-b3c8db74739e",
+    "educationalProgramId": "2ead9186-ceb4-4ee3-907f-5043f2a013fa",
     "email": "fedya@gmail.com",
+    "fullName": "Фёдоров Фёдор Фёдорович",
+    "mobilePhone": "+7(999)123-45-67",
     "answers": [
         {
             "questionId": "67a8871c-1bc9-47e3-8e2c-504ee3c4253c",
