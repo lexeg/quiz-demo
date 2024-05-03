@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using QuizDemo.DataAccess.Entities;
 using QuizDemo.DataAccess.Repositories;
+using QuizDemo.Helpers;
 using QuizDemo.Messages;
 using QuizDemo.Models;
 
@@ -31,6 +32,10 @@ public class CandidatesService : ICandidatesService
 
     public Task SaveCandidateResult(CreateCandidateResultModel model)
     {
+        var expiredDate = DateTime.UtcNow.AddDays(1);
+        model.Id = Guid.NewGuid();
+        model.PresignedUrl = TestResultHelper.CreatePresignedUrl(expiredDate, model.Id.ToString());
+        model.ExpiredDate = expiredDate;
         return _testResultRepository.Create(_mapper.Map<TestResultEntity>(model));
     }
 }

@@ -35,6 +35,8 @@ public class TestResultRepository : ITestResultRepository
                 Email = x.Email,
                 FullName = x.FullName,
                 MobilePhone = x.MobilePhone,
+                PresignedUrl = x.PresignedUrl,
+                ExpiredDate = x.ExpiredDate,
                 Questions = CreateQuestions(x.Answers, x.Test.Questions),
             }).ToArrayAsync();
     }
