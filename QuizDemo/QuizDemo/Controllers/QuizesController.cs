@@ -32,7 +32,7 @@ public class QuizesController : ControllerBase
     /// <response code="200">Запрос успешно прошел</response>
     [HttpGet]
     [Produces("application/json")]
-    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(CandidateResultResponse[]),
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(QuizResponse[]),
         Description = "Запрос успешно прошел")]
     public Task<QuizResponse[]> GetAll() => _quizesService.GetAll();
 
@@ -45,7 +45,7 @@ public class QuizesController : ControllerBase
     /// <response code="404">Запись с таким id не найдена</response>
     [HttpGet("{id}")]
     [Produces("application/json")]
-    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(CandidateResultResponse),
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(QuizResponse),
         Description = "Запрос успешно прошел")]
     [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Запись с таким id не найдена")]
     public async Task<QuizDetailedResponse> GetById([FromRoute] Guid id)

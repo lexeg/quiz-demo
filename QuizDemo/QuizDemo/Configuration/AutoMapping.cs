@@ -17,7 +17,11 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
         CreateMap<CreateCandidateResultRequest, CreateCandidateResultModel>()
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest => dest.BranchOfficeId, opt => opt.MapFrom(src => src.BranchOfficeId))
+            .ForMember(dest => dest.EducationalProgramId, opt => opt.MapFrom(src => src.EducationalProgramId))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+            .ForMember(dest => dest.MobilePhone, opt => opt.MapFrom(src => src.MobilePhone))
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
         CreateMap<CreateEducationalProgramRequest, CreateEducationalProgramModel>()
             .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))
@@ -36,11 +40,21 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
             .ForMember(dest => dest.TestName, opt => opt.MapFrom(src => src.TestName))
+            .ForMember(dest => dest.BranchOfficeId, opt => opt.MapFrom(src => src.BranchOfficeId))
+            .ForMember(dest => dest.BranchOfficeName, opt => opt.MapFrom(src => src.BranchOfficeName))
+            .ForMember(dest => dest.EducationalProgramId, opt => opt.MapFrom(src => src.EducationalProgramId))
+            .ForMember(dest => dest.EducationalProgramName, opt => opt.MapFrom(src => src.EducationalProgramName))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+            .ForMember(dest => dest.MobilePhone, opt => opt.MapFrom(src => src.MobilePhone))
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
         CreateMap<CreateCandidateResultModel, TestResultEntity>()
             .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest => dest.BranchOfficeId, opt => opt.MapFrom(src => src.BranchOfficeId))
+            .ForMember(dest => dest.EducationalProgramId, opt => opt.MapFrom(src => src.EducationalProgramId))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+            .ForMember(dest => dest.MobilePhone, opt => opt.MapFrom(src => src.MobilePhone))
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => CreateAnswersMap(src.Answers)));
         CreateMap<CreateEducationalProgramModel, EducationalProgramEntity>()
             .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))

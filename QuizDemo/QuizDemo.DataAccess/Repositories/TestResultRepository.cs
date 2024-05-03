@@ -21,12 +21,20 @@ public class TestResultRepository : ITestResultRepository
     {
         return _quizDbContext.TestResults
             .Include(x => x.Test)
+            .Include(x => x.BranchOffice)
+            .Include(x => x.EducationalProgram)
             .Select(x => new TestResultDataModel
             {
                 Id = x.Id,
                 TestId = x.TestId,
                 TestName = x.Test.Name,
+                BranchOfficeId = x.BranchOfficeId,
+                BranchOfficeName = x.BranchOffice.Name,
+                EducationalProgramId = x.EducationalProgramId,
+                EducationalProgramName = x.EducationalProgram.Name,
                 Email = x.Email,
+                FullName = x.FullName,
+                MobilePhone = x.MobilePhone,
                 Questions = CreateQuestions(x.Answers, x.Test.Questions),
             }).ToArrayAsync();
     }
