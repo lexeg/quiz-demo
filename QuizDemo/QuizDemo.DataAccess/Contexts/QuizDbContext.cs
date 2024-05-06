@@ -14,6 +14,8 @@ public class QuizDbContext : DbContext
 
     public virtual DbSet<EducationalProgramEntity> EducationalPrograms { get; set; }
 
+    public virtual DbSet<PresignedUrlEntity> PresignedUrls { get; set; }
+
     public virtual DbSet<QuestionEntity> Questions { get; set; }
 
     public virtual DbSet<TestResultEntity> TestResults { get; set; }

@@ -24,9 +24,5 @@ public class CandidateResultResponse
 
     public string MobilePhone { get; set; }
 
-    public string PresignedUrl { get; set; }
-
-    public DateTime ExpiredDate { get; set; }
-
     public QuestionResultModel[] Questions { get; set; }
 }

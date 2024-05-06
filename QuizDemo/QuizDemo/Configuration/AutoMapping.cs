@@ -47,8 +47,6 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
             .ForMember(dest => dest.MobilePhone, opt => opt.MapFrom(src => src.MobilePhone))
-            .ForMember(dest => dest.PresignedUrl, opt => opt.MapFrom(src => src.PresignedUrl))
-            .ForMember(dest => dest.ExpiredDate, opt => opt.MapFrom(src => src.ExpiredDate))
             .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
         CreateMap<CreateCandidateResultModel, TestResultEntity>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -58,8 +56,6 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
             .ForMember(dest => dest.MobilePhone, opt => opt.MapFrom(src => src.MobilePhone))
-            .ForMember(dest => dest.PresignedUrl, opt => opt.MapFrom(src => src.PresignedUrl))
-            .ForMember(dest => dest.ExpiredDate, opt => opt.MapFrom(src => src.ExpiredDate))
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => CreateAnswersMap(src.Answers)));
         CreateMap<CreateEducationalProgramModel, EducationalProgramEntity>()
             .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.ExternalId))

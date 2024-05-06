@@ -8,6 +8,8 @@ public class TestEntity
 
     public string Description { get; set; }
 
+    public virtual ICollection<PresignedUrlEntity> PresignedUrls { get; set; } = new List<PresignedUrlEntity>();
+
     public virtual ICollection<QuestionEntity> Questions { get; set; } = new List<QuestionEntity>();
 
     public virtual TestResultEntity TestResult { get; set; }

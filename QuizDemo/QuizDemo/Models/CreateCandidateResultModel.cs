@@ -16,9 +16,5 @@ public class CreateCandidateResultModel
 
     public string MobilePhone { get; set; }
 
-    public string PresignedUrl { get; set; }
-
-    public DateTime ExpiredDate { get; set; }
-
     public CandidateAnswerModel[] Answers { get; set; }
 }
