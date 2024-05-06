@@ -37,6 +37,7 @@ public class Startup
         services.AddScoped<ITestResultRepository, TestResultRepository>();
         services.AddScoped<IEducationalProgramRepository, EducationalProgramRepository>();
         services.AddScoped<IBranchOfficeRepository, BranchOfficeRepository>();
+        services.AddScoped<IPresignedUrlRepository, PresignedUrlRepository>();
         services.AddScoped<IQuizesService, QuizesService>();
         services.AddScoped<ICandidatesService, CandidatesService>();
         services.AddScoped<IEducationalProgramsService, EducationalProgramsService>();

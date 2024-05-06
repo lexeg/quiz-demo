@@ -29,6 +29,7 @@ public class AutoMapping : Profile
         CreateMap<CreateBranchOfficeRequest, CreateBranchOfficeModel>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Prefix, opt => opt.MapFrom(src => src.Prefix));
+        CreateMap<PresignedUrlRequest, PresignedUrlModel>();
         CreateMap<QuestionResultModel, QuestionResultDataModel>()
             .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
             .ForMember(dest => dest.QuestionText, opt => opt.MapFrom(src => src.QuestionText))

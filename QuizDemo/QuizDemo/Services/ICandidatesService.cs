@@ -8,4 +8,5 @@ public interface ICandidatesService
     Task<CandidateResultResponse[]> GetResults();
     Task<CandidateResultResponse> GetResultsById(Guid id);
     Task SaveCandidateResult(CreateCandidateResultModel model);
+    Task<string> CreatePresignedUrl(PresignedUrlModel presignedUrlModel);
 }

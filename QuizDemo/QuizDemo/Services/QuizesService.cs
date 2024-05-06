@@ -10,12 +10,17 @@ public class QuizesService : IQuizesService
 {
     private readonly ITestRepository _testRepository;
     private readonly IQuestionRepository _questionRepository;
+    private readonly IPresignedUrlRepository _presignedUrlRepository;
     private readonly IMapper _mapper;
 
-    public QuizesService(ITestRepository testRepository, IQuestionRepository questionRepository, IMapper mapper)
+    public QuizesService(ITestRepository testRepository,
+        IQuestionRepository questionRepository,
+        IPresignedUrlRepository presignedUrlRepository,
+        IMapper mapper)
     {
         _testRepository = testRepository;
         _questionRepository = questionRepository;
+        _presignedUrlRepository = presignedUrlRepository;
         _mapper = mapper;
     }
 
@@ -29,6 +34,14 @@ public class QuizesService : IQuizesService
     {
         var entity = await _testRepository.GetById(id);
         return _mapper.Map<QuizDetailedResponse>(entity);
+    }
+
+    public async Task<QuizDetailedResponse> GetByPresignedUrl(string presignedUrl)
+    {
+        var presignedUrlEntity = (await _presignedUrlRepository.GetByPresignedUrl(presignedUrl))
+            .FirstOrDefault(x => x.ExpiredDate >= DateTime.UtcNow);
+        if (presignedUrlEntity == null) return null;
+        return await GetById(presignedUrlEntity.TestId);
     }
 
     public async Task Create(CreateQuizModel createQuizModel)

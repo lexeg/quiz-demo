@@ -60,6 +60,29 @@ public class QuizesController : ControllerBase
     }
 
     /// <summary>
+    /// Вернуть детальную информацию о тесте (presignedUrl теста): все поля из таблицы с тестами + ответы теста.
+    /// </summary>
+    /// <param name="presignedUrl">presignedUrl теста</param>
+    /// <returns></returns>
+    /// <response code="200">Запрос успешно прошел</response>
+    /// <response code="404">Запись с таким id не найдена</response>
+    [HttpGet("presigned-url/{presignedUrl}")]
+    [Produces("application/json")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(QuizResponse),
+        Description = "Запрос успешно прошел")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Запись с таким presignedUrl не найдена")]
+    public async Task<QuizDetailedResponse> GetByPresignedUrl([FromRoute] string presignedUrl)
+    {
+        var quiz = await _quizesService.GetByPresignedUrl(presignedUrl);
+        if (quiz == null)
+        {
+            throw new HttpResponseException(HttpStatusCode.NotFound, $"quiz with url = {presignedUrl} not found");
+        }
+
+        return quiz;
+    }
+
+    /// <summary>
     /// Создать тест
     /// </summary>
     /// <param name="request">Данные для теста</param>

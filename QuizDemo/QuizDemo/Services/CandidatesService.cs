@@ -9,11 +9,15 @@ namespace QuizDemo.Services;
 public class CandidatesService : ICandidatesService
 {
     private readonly ITestResultRepository _testResultRepository;
+    private readonly IPresignedUrlRepository _presignedUrlRepository;
     private readonly IMapper _mapper;
 
-    public CandidatesService(ITestResultRepository testResultRepository, IMapper mapper)
+    public CandidatesService(ITestResultRepository testResultRepository,
+        IPresignedUrlRepository presignedUrlRepository,
+        IMapper mapper)
     {
         _testResultRepository = testResultRepository;
+        _presignedUrlRepository = presignedUrlRepository;
         _mapper = mapper;
     }
 
@@ -32,5 +36,21 @@ public class CandidatesService : ICandidatesService
     public Task SaveCandidateResult(CreateCandidateResultModel model)
     {
         return _testResultRepository.Create(_mapper.Map<TestResultEntity>(model));
+    }
+
+    public async Task<string> CreatePresignedUrl(PresignedUrlModel presignedUrlModel)
+    {
+        var expiredDate = DateTime.UtcNow.AddDays(1);
+        var presignedUrl = presignedUrlModel.CreatePresignedUrl(expiredDate);
+        var entity = new PresignedUrlEntity
+        {
+            BranchOfficeId = presignedUrlModel.BranchOfficeId,
+            EducationalProgramId = presignedUrlModel.EducationalProgramId,
+            TestId = presignedUrlModel.TestId,
+            PresignedUrl = presignedUrl,
+            ExpiredDate = expiredDate
+        };
+        await _presignedUrlRepository.Create(entity);
+        return presignedUrl;
     }
 }

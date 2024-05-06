@@ -74,4 +74,21 @@ public class CandidatesController : ControllerBase
         await _candidatesService.SaveCandidateResult(_mapper.Map<CreateCandidateResultModel>(request));
         return Ok();
     }
+
+    /// <summary>
+    /// Отправить временный url с тестом
+    /// </summary>
+    /// <param name="request">Данные для создания ссылки</param>
+    /// <returns></returns>
+    /// <response code="200">Запрос успешно прошел</response>
+    [HttpGet("presigned-url")]
+    [Produces("application/json")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(string), Description = "Запрос успешно прошел")]
+    public async Task<string> GetPresignedUrl([FromQuery] PresignedUrlRequest request)
+    {
+        var presignedUrl = await _candidatesService.CreatePresignedUrl(_mapper.Map<PresignedUrlModel>(request));
+        return Url.ActionLink(action: nameof(QuizesController.GetByPresignedUrl),
+            controller: "Quizes",
+            values: new { presignedUrl = presignedUrl });
+    }
 }

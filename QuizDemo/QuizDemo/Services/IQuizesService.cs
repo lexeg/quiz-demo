@@ -7,5 +7,6 @@ public interface IQuizesService
 {
     Task<QuizResponse[]> GetAll();
     Task<QuizDetailedResponse> GetById(Guid id);
+    Task<QuizDetailedResponse> GetByPresignedUrl(string presignedUrl);
     Task Create(CreateQuizModel createQuizModel);
 }
