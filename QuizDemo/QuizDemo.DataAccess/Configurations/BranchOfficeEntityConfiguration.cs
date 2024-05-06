@@ -8,7 +8,7 @@ public class BranchOfficeEntityConfiguration : IEntityTypeConfiguration<BranchOf
 {
     public void Configure(EntityTypeBuilder<BranchOfficeEntity> builder)
     {
-        builder.HasKey(e => e.Id).HasName("branch_office_table_pkey");
+        builder.HasKey(e => e.Id);
 
         builder.ToTable("branch_office_table");
 

@@ -21,7 +21,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("branch_office_table_pkey", x => x.id);
+                    table.PrimaryKey("PK_branch_office_table", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,7 +33,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("educational_program_table_pkey", x => x.external_id);
+                    table.PrimaryKey("PK_educational_program_table", x => x.external_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,41 +46,38 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("TestsTable_pkey", x => x.id);
+                    table.PrimaryKey("PK_tests_table", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PresignedUrls",
+                name: "presigned_url_table",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    BranchOfficeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EducationalProgramId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TestId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PresignedUrl = table.Column<string>(type: "text", nullable: true),
-                    ExpiredDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    branch_office_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    educational_program_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    test_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    presigned_url = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
+                    expired_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PresignedUrls", x => x.Id);
+                    table.PrimaryKey("PK_presigned_url_table", x => x.id);
                     table.ForeignKey(
-                        name: "FK_PresignedUrls_branch_office_table_BranchOfficeId",
-                        column: x => x.BranchOfficeId,
+                        name: "FK_presigned_url_table_branch_office_table_branch_office_id",
+                        column: x => x.branch_office_id,
                         principalTable: "branch_office_table",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_PresignedUrls_educational_program_table_EducationalProgramId",
-                        column: x => x.EducationalProgramId,
+                        name: "FK_presigned_url_table_educational_program_table_educational_p~",
+                        column: x => x.educational_program_id,
                         principalTable: "educational_program_table",
-                        principalColumn: "external_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "external_id");
                     table.ForeignKey(
-                        name: "FK_PresignedUrls_tests_table_TestId",
-                        column: x => x.TestId,
+                        name: "FK_presigned_url_table_tests_table_test_id",
+                        column: x => x.test_id,
                         principalTable: "tests_table",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,9 +91,9 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("questions_table_pkey", x => x.id);
+                    table.PrimaryKey("PK_questions_table", x => x.id);
                     table.ForeignKey(
-                        name: "questions_table_test_id_fkey",
+                        name: "FK_questions_table_tests_table_test_id",
                         column: x => x.test_id,
                         principalTable: "tests_table",
                         principalColumn: "id");
@@ -117,38 +114,44 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("test_results_table_pkey", x => x.id);
+                    table.PrimaryKey("PK_test_results_table", x => x.id);
                     table.ForeignKey(
-                        name: "test_results_table_branch_office_id_fkey",
+                        name: "FK_test_results_table_branch_office_table_branch_office_id",
                         column: x => x.branch_office_id,
                         principalTable: "branch_office_table",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "test_results_table_educational_program_id_fkey",
+                        name: "FK_test_results_table_educational_program_table_educational_pr~",
                         column: x => x.educational_program_id,
                         principalTable: "educational_program_table",
                         principalColumn: "external_id");
                     table.ForeignKey(
-                        name: "test_results_table_id_fkey",
+                        name: "FK_test_results_table_tests_table_test_id",
                         column: x => x.test_id,
                         principalTable: "tests_table",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PresignedUrls_BranchOfficeId",
-                table: "PresignedUrls",
-                column: "BranchOfficeId");
+                name: "IX_presigned_url_table_branch_office_id",
+                table: "presigned_url_table",
+                column: "branch_office_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PresignedUrls_EducationalProgramId",
-                table: "PresignedUrls",
-                column: "EducationalProgramId");
+                name: "IX_presigned_url_table_educational_program_id",
+                table: "presigned_url_table",
+                column: "educational_program_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PresignedUrls_TestId",
-                table: "PresignedUrls",
-                column: "TestId");
+                name: "IX_presigned_url_table_expired_date_presigned_url",
+                table: "presigned_url_table",
+                columns: new[] { "expired_date", "presigned_url" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_presigned_url_table_test_id",
+                table: "presigned_url_table",
+                column: "test_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_questions_table_test_id",
@@ -176,7 +179,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PresignedUrls");
+                name: "presigned_url_table");
 
             migrationBuilder.DropTable(
                 name: "questions_table");

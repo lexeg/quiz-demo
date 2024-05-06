@@ -8,7 +8,7 @@ public class QuestionEntityConfiguration : IEntityTypeConfiguration<QuestionEnti
 {
     public void Configure(EntityTypeBuilder<QuestionEntity> builder)
     {
-        builder.HasKey(e => e.Id).HasName("questions_table_pkey");
+        builder.HasKey(e => e.Id);
 
         builder.ToTable("questions_table");
 
@@ -29,7 +29,6 @@ public class QuestionEntityConfiguration : IEntityTypeConfiguration<QuestionEnti
             .HasOne(d => d.Test)
             .WithMany(p => p.Questions)
             .HasForeignKey(d => d.TestId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .HasConstraintName("questions_table_test_id_fkey");
+            .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

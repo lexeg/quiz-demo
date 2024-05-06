@@ -8,7 +8,7 @@ public class EducationalProgramEntityConfiguration : IEntityTypeConfiguration<Ed
 {
     public void Configure(EntityTypeBuilder<EducationalProgramEntity> builder)
     {
-        builder.HasKey(e => e.ExternalId).HasName("educational_program_table_pkey");
+        builder.HasKey(e => e.ExternalId);
 
         builder.ToTable("educational_program_table");
 

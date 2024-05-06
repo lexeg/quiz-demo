@@ -8,7 +8,7 @@ public class TestEntityConfiguration : IEntityTypeConfiguration<TestEntity>
 {
     public void Configure(EntityTypeBuilder<TestEntity> builder)
     {
-        builder.HasKey(e => e.Id).HasName("TestsTable_pkey");
+        builder.HasKey(e => e.Id);
 
         builder.ToTable("tests_table");
 

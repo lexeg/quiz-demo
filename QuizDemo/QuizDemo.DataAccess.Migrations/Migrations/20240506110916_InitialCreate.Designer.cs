@@ -12,7 +12,7 @@ using QuizDemo.DataAccess.Contexts;
 namespace QuizDemo.DataAccess.Migrations.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20240506060454_InitialCreate")]
+    [Migration("20240506110916_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,8 +43,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("character varying(10)")
                         .HasColumnName("prefix");
 
-                    b.HasKey("Id")
-                        .HasName("branch_office_table_pkey");
+                    b.HasKey("Id");
 
                     b.ToTable("branch_office_table", (string)null);
                 });
@@ -61,8 +60,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name");
 
-                    b.HasKey("ExternalId")
-                        .HasName("educational_program_table_pkey");
+                    b.HasKey("ExternalId");
 
                     b.ToTable("educational_program_table", (string)null);
                 });
@@ -70,23 +68,30 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.PresignedUrlEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("BranchOfficeId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("branch_office_id");
 
                     b.Property<Guid>("EducationalProgramId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("educational_program_id");
 
                     b.Property<DateTime>("ExpiredDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expired_date");
 
                     b.Property<string>("PresignedUrl")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("presigned_url");
 
                     b.Property<Guid>("TestId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("test_id");
 
                     b.HasKey("Id");
 
@@ -96,7 +101,10 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
 
                     b.HasIndex("TestId");
 
-                    b.ToTable("PresignedUrls");
+                    b.HasIndex("ExpiredDate", "PresignedUrl")
+                        .IsUnique();
+
+                    b.ToTable("presigned_url_table", (string)null);
                 });
 
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.QuestionEntity", b =>
@@ -120,8 +128,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("test_id");
 
-                    b.HasKey("Id")
-                        .HasName("questions_table_pkey");
+                    b.HasKey("Id");
 
                     b.HasIndex("TestId");
 
@@ -146,8 +153,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("name");
 
-                    b.HasKey("Id")
-                        .HasName("TestsTable_pkey");
+                    b.HasKey("Id");
 
                     b.ToTable("tests_table", (string)null);
                 });
@@ -193,8 +199,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("test_id");
 
-                    b.HasKey("Id")
-                        .HasName("test_results_table_pkey");
+                    b.HasKey("Id");
 
                     b.HasIndex("BranchOfficeId");
 
@@ -211,19 +216,16 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     b.HasOne("QuizDemo.DataAccess.Entities.BranchOfficeEntity", "BranchOffice")
                         .WithMany("PresignedUrls")
                         .HasForeignKey("BranchOfficeId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QuizDemo.DataAccess.Entities.EducationalProgramEntity", "EducationalProgram")
                         .WithMany("PresignedUrls")
                         .HasForeignKey("EducationalProgramId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QuizDemo.DataAccess.Entities.TestEntity", "Test")
                         .WithMany("PresignedUrls")
                         .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BranchOffice");
@@ -238,8 +240,7 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     b.HasOne("QuizDemo.DataAccess.Entities.TestEntity", "Test")
                         .WithMany("Questions")
                         .HasForeignKey("TestId")
-                        .IsRequired()
-                        .HasConstraintName("questions_table_test_id_fkey");
+                        .IsRequired();
 
                     b.Navigation("Test");
                 });
@@ -249,20 +250,17 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     b.HasOne("QuizDemo.DataAccess.Entities.BranchOfficeEntity", "BranchOffice")
                         .WithMany("TestResults")
                         .HasForeignKey("BranchOfficeId")
-                        .IsRequired()
-                        .HasConstraintName("test_results_table_branch_office_id_fkey");
+                        .IsRequired();
 
                     b.HasOne("QuizDemo.DataAccess.Entities.EducationalProgramEntity", "EducationalProgram")
                         .WithMany("TestResults")
                         .HasForeignKey("EducationalProgramId")
-                        .IsRequired()
-                        .HasConstraintName("test_results_table_educational_program_id_fkey");
+                        .IsRequired();
 
                     b.HasOne("QuizDemo.DataAccess.Entities.TestEntity", "Test")
                         .WithOne("TestResult")
                         .HasForeignKey("QuizDemo.DataAccess.Entities.TestResultEntity", "TestId")
-                        .IsRequired()
-                        .HasConstraintName("test_results_table_id_fkey");
+                        .IsRequired();
 
                     b.Navigation("BranchOffice");
 

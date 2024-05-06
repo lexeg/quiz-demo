@@ -8,7 +8,7 @@ public class TestResultEntityConfiguration : IEntityTypeConfiguration<TestResult
 {
     public void Configure(EntityTypeBuilder<TestResultEntity> builder)
     {
-        builder.HasKey(e => e.Id).HasName("test_results_table_pkey");
+        builder.HasKey(e => e.Id);
 
         builder.ToTable("test_results_table");
 
@@ -39,21 +39,18 @@ public class TestResultEntityConfiguration : IEntityTypeConfiguration<TestResult
             .HasOne(d => d.Test)
             .WithOne(p => p.TestResult)
             .HasForeignKey<TestResultEntity>(d => d.TestId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .HasConstraintName("test_results_table_id_fkey");
+            .OnDelete(DeleteBehavior.ClientSetNull);
 
         builder
             .HasOne(d => d.BranchOffice)
             .WithMany(p => p.TestResults)
             .HasForeignKey(d => d.BranchOfficeId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .HasConstraintName("test_results_table_branch_office_id_fkey");
+            .OnDelete(DeleteBehavior.ClientSetNull);
 
         builder
             .HasOne(d => d.EducationalProgram)
             .WithMany(p => p.TestResults)
             .HasForeignKey(d => d.EducationalProgramId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .HasConstraintName("test_results_table_educational_program_id_fkey");
+            .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

@@ -29,5 +29,6 @@ public class QuizDbContext : DbContext
         modelBuilder.ApplyConfiguration(new TestEntityConfiguration());
         modelBuilder.ApplyConfiguration(new BranchOfficeEntityConfiguration());
         modelBuilder.ApplyConfiguration(new EducationalProgramEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new PresignedUrlEntityConfiguration());
     }
 }
