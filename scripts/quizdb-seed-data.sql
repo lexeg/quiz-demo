@@ -10,7 +10,7 @@ VALUES ('2EAD9186-CEB4-4EE3-907F-5043F2A013FA', 'РПО'),
 INSERT INTO public.tests_table(id, name, description)
 VALUES ('d4553a73-0fcc-4055-97fb-683de215a878', 'Test №1', 'Описание для теста № 1');
 
-INSERT INTO public."PresignedUrls"("Id", "BranchOfficeId", "EducationalProgramId", "TestId", "PresignedUrl", "ExpiredDate")
+INSERT INTO public.presigned_url_table(id, branch_office_id, educational_program_id, test_id, presigned_url, expired_date)
 VALUES ('4400ECB2-5C00-42CA-940E-7A043624F1C8', '2952F21F-5FED-4AA8-BA77-C8A466230349', '2EAD9186-CEB4-4EE3-907F-5043F2A013FA', 'd4553a73-0fcc-4055-97fb-683de215a878', '3F6-_nVu3Ag', NOW() + INTERVAL '1 DAY');
 
 INSERT INTO public.questions_table(id, test_id, question, answers)
