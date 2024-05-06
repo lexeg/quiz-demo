@@ -143,6 +143,10 @@ curl --location 'http://localhost:5000/Quizes' \
     ]
 }'
 
+"name": "Get quiz by presigned url":
+curl --location 'http://localhost:5000/Quizes/presigned-url/s6xJMY9u3Ag' \
+--header 'accept: application/json'
+
 "name": "Save candidate result":
 curl --location 'http://localhost:5000/Candidates' \
 --header 'accept: */*' \
@@ -177,3 +181,7 @@ curl --location 'http://localhost:5000/Candidates' \
         },
     ]
 }'
+
+"name": "Get test presigned url for candidate":
+curl --location 'http://localhost:5000/Candidates/presigned-url?branch-office=2952F21F-5FED-4AA8-BA77-C8A466230349&educational-program=2EAD9186-CEB4-4EE3-907F-5043F2A013FA&test=d4553a73-0fcc-4055-97fb-683de215a878' \
+--header 'accept: application/json'

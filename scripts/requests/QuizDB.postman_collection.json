@@ -114,6 +114,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get test presigned url for candidate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5082/Candidates/presigned-url?branch-office=2952F21F-5FED-4AA8-BA77-C8A466230349&educational-program=2EAD9186-CEB4-4EE3-907F-5043F2A013FA&test=d4553a73-0fcc-4055-97fb-683de215a878",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5082",
+							"path": [
+								"Candidates",
+								"presigned-url"
+							],
+							"query": [
+								{
+									"key": "branch-office",
+									"value": "2952F21F-5FED-4AA8-BA77-C8A466230349"
+								},
+								{
+									"key": "educational-program",
+									"value": "2EAD9186-CEB4-4EE3-907F-5043F2A013FA"
+								},
+								{
+									"key": "test",
+									"value": "d4553a73-0fcc-4055-97fb-683de215a878"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -221,6 +260,32 @@
 							"port": "5082",
 							"path": [
 								"Quizes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get quiz by presigned url",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5082/Quizes/presigned-url/s6xJMY9u3Ag",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5082",
+							"path": [
+								"Quizes",
+								"presigned-url",
+								"s6xJMY9u3Ag"
 							]
 						}
 					},
