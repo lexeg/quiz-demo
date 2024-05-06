@@ -16,7 +16,7 @@ public class PresignedUrlRepository : IPresignedUrlRepository
     public Task<PresignedUrlEntity[]> GetByPresignedUrl(string presignedUrl) =>
         _quizDbContext
             .PresignedUrls
-            .Where(x => x.PresignedUrl.Equals(presignedUrl, StringComparison.OrdinalIgnoreCase))
+            .Where(x => EF.Functions.Like(x.PresignedUrl, presignedUrl))
             .ToArrayAsync();
 
     public async Task<Guid> Create(PresignedUrlEntity entity)
