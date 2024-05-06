@@ -50,6 +50,40 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PresignedUrls",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    BranchOfficeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    EducationalProgramId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TestId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PresignedUrl = table.Column<string>(type: "text", nullable: true),
+                    ExpiredDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PresignedUrls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PresignedUrls_branch_office_table_BranchOfficeId",
+                        column: x => x.BranchOfficeId,
+                        principalTable: "branch_office_table",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PresignedUrls_educational_program_table_EducationalProgramId",
+                        column: x => x.EducationalProgramId,
+                        principalTable: "educational_program_table",
+                        principalColumn: "external_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PresignedUrls_tests_table_TestId",
+                        column: x => x.TestId,
+                        principalTable: "tests_table",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "questions_table",
                 columns: table => new
                 {
@@ -79,8 +113,6 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     full_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     mobile_phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    presigned_url = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
-                    expired_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     answers = table.Column<string>(type: "json", nullable: false)
                 },
                 constraints: table =>
@@ -102,6 +134,21 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         principalTable: "tests_table",
                         principalColumn: "id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PresignedUrls_BranchOfficeId",
+                table: "PresignedUrls",
+                column: "BranchOfficeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PresignedUrls_EducationalProgramId",
+                table: "PresignedUrls",
+                column: "EducationalProgramId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PresignedUrls_TestId",
+                table: "PresignedUrls",
+                column: "TestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_questions_table_test_id",
@@ -128,6 +175,9 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PresignedUrls");
+
             migrationBuilder.DropTable(
                 name: "questions_table");
 

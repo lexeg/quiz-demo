@@ -64,6 +64,38 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                     b.ToTable("educational_program_table", (string)null);
                 });
 
+            modelBuilder.Entity("QuizDemo.DataAccess.Entities.PresignedUrlEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BranchOfficeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("EducationalProgramId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ExpiredDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PresignedUrl")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TestId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchOfficeId");
+
+                    b.HasIndex("EducationalProgramId");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("PresignedUrls");
+                });
+
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.QuestionEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -142,10 +174,6 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("email");
 
-                    b.Property<DateTime>("ExpiredDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("expired_date");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -157,12 +185,6 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
                         .HasColumnName("mobile_phone");
-
-                    b.Property<string>("PresignedUrl")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)")
-                        .HasColumnName("presigned_url");
 
                     b.Property<Guid>("TestId")
                         .HasColumnType("uuid")
@@ -179,6 +201,33 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
                         .IsUnique();
 
                     b.ToTable("test_results_table", (string)null);
+                });
+
+            modelBuilder.Entity("QuizDemo.DataAccess.Entities.PresignedUrlEntity", b =>
+                {
+                    b.HasOne("QuizDemo.DataAccess.Entities.BranchOfficeEntity", "BranchOffice")
+                        .WithMany("PresignedUrls")
+                        .HasForeignKey("BranchOfficeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuizDemo.DataAccess.Entities.EducationalProgramEntity", "EducationalProgram")
+                        .WithMany("PresignedUrls")
+                        .HasForeignKey("EducationalProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuizDemo.DataAccess.Entities.TestEntity", "Test")
+                        .WithMany("PresignedUrls")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BranchOffice");
+
+                    b.Navigation("EducationalProgram");
+
+                    b.Navigation("Test");
                 });
 
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.QuestionEntity", b =>
@@ -221,16 +270,22 @@ namespace QuizDemo.DataAccess.Migrations.Migrations
 
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.BranchOfficeEntity", b =>
                 {
+                    b.Navigation("PresignedUrls");
+
                     b.Navigation("TestResults");
                 });
 
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.EducationalProgramEntity", b =>
                 {
+                    b.Navigation("PresignedUrls");
+
                     b.Navigation("TestResults");
                 });
 
             modelBuilder.Entity("QuizDemo.DataAccess.Entities.TestEntity", b =>
                 {
+                    b.Navigation("PresignedUrls");
+
                     b.Navigation("Questions");
 
                     b.Navigation("TestResult");
