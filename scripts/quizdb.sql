@@ -9,7 +9,7 @@ START TRANSACTION;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE TABLE branch_office_table (
         id uuid NOT NULL,
         name character varying(200) NOT NULL,
@@ -21,7 +21,7 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE TABLE educational_program_table (
         external_id uuid NOT NULL,
         name character varying(100) NOT NULL,
@@ -32,7 +32,7 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE TABLE tests_table (
         id uuid NOT NULL,
         name character varying(150) NOT NULL,
@@ -44,7 +44,25 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
+    CREATE TABLE "PresignedUrls" (
+        "Id" uuid NOT NULL,
+        "BranchOfficeId" uuid NOT NULL,
+        "EducationalProgramId" uuid NOT NULL,
+        "TestId" uuid NOT NULL,
+        "PresignedUrl" text,
+        "ExpiredDate" timestamp with time zone NOT NULL,
+        CONSTRAINT "PK_PresignedUrls" PRIMARY KEY ("Id"),
+        CONSTRAINT "FK_PresignedUrls_branch_office_table_BranchOfficeId" FOREIGN KEY ("BranchOfficeId") REFERENCES branch_office_table (id) ON DELETE CASCADE,
+        CONSTRAINT "FK_PresignedUrls_educational_program_table_EducationalProgramId" FOREIGN KEY ("EducationalProgramId") REFERENCES educational_program_table (external_id) ON DELETE CASCADE,
+        CONSTRAINT "FK_PresignedUrls_tests_table_TestId" FOREIGN KEY ("TestId") REFERENCES tests_table (id) ON DELETE CASCADE
+    );
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE TABLE questions_table (
         id uuid NOT NULL,
         test_id uuid NOT NULL,
@@ -58,7 +76,7 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE TABLE test_results_table (
         id uuid NOT NULL,
         test_id uuid NOT NULL,
@@ -67,8 +85,6 @@ BEGIN
         email character varying(100) NOT NULL,
         full_name character varying(100) NOT NULL,
         mobile_phone character varying(20) NOT NULL,
-        presigned_url character varying(300) NOT NULL,
-        expired_date timestamp with time zone NOT NULL,
         answers json NOT NULL,
         CONSTRAINT test_results_table_pkey PRIMARY KEY (id),
         CONSTRAINT test_results_table_branch_office_id_fkey FOREIGN KEY (branch_office_id) REFERENCES branch_office_table (id),
@@ -80,37 +96,58 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
+    CREATE INDEX "IX_PresignedUrls_BranchOfficeId" ON "PresignedUrls" ("BranchOfficeId");
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
+    CREATE INDEX "IX_PresignedUrls_EducationalProgramId" ON "PresignedUrls" ("EducationalProgramId");
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
+    CREATE INDEX "IX_PresignedUrls_TestId" ON "PresignedUrls" ("TestId");
+    END IF;
+END $EF$;
+
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE INDEX "IX_questions_table_test_id" ON questions_table (test_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE INDEX "IX_test_results_table_branch_office_id" ON test_results_table (branch_office_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE INDEX "IX_test_results_table_educational_program_id" ON test_results_table (educational_program_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     CREATE UNIQUE INDEX "IX_test_results_table_test_id" ON test_results_table (test_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240503151741_InitialCreate') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20240506060454_InitialCreate') THEN
     INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-    VALUES ('20240503151741_InitialCreate', '8.0.3');
+    VALUES ('20240506060454_InitialCreate', '8.0.3');
     END IF;
 END $EF$;
 COMMIT;
